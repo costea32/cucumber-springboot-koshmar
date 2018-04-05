@@ -3,6 +3,8 @@ package org.testmonkeys.starter.cucumber.springboot.run;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
+//please add the -Dwebdriver.chrome.driver=C:\drivers\chromedriver.exe param, adjusted to your local path,
+//or ignore this if you have it on PATH
 
 @RunWith(Cucumber.class)
 @CucumberOptions(//src\test\resouces\features
