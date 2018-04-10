@@ -1,5 +1,6 @@
 package org.testmonkeys.starter.cucumber.springboot.hooks;
 
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,17 @@ public class WebHooks {
 
     @After("@Web")
     public void webCleanup(){
+        takeScreenshotOnFailure();
+
         scenarioContext.getBrowser().quit();
+    }
+
+    private void takeScreenshotOnFailure() {
+        Scenario scenario = scenarioContext.getCucumberScenario();
+
+        if (scenario!=null && scenario.isFailed()){
+            scenario.write("Last screen attached");
+            scenario.embed(scenarioContext.getBrowser().takeScreenshot(),"image/png");
+        }
     }
 }
